@@ -98,4 +98,19 @@ describe('MovieListComponent', () => {
     expect(component.currentPage()).toBe(2);
     expect(component.pageSize()).toBe(25);
   });
+
+  it('deve aceitar filterYear como number e executar busca com ano numérico', async () => {
+    component.ngOnInit();
+    // Simula binding do input type=number do Angular que entrega tipo number
+    component.filterYear.set(1986 as unknown as string);
+    component.onFilterChange();
+
+    await new Promise((resolve) => setTimeout(resolve, 400));
+
+    expect(mockGetMoviesUseCase.execute).toHaveBeenCalledWith(
+      expect.objectContaining({
+        year: 1986,
+      })
+    );
+  });
 });

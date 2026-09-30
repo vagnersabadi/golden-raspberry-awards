@@ -58,7 +58,7 @@ describe('MovieHttpRepository', () => {
   });
 
   describe('getYearsWithMultipleWinners', () => {
-    it('deve chamar a URL com a projection years-with-multiple-winners', () => {
+    it('deve chamar a URL /yearsWithMultipleWinners', () => {
       const mockResponse = {
         years: [
           { year: 1986, winnerCount: 2 },
@@ -70,14 +70,14 @@ describe('MovieHttpRepository', () => {
         expect(data).toEqual(mockResponse);
       });
 
-      const req = httpTesting.expectOne(`${apiUrl}?projection=years-with-multiple-winners`);
+      const req = httpTesting.expectOne(`${apiUrl}/yearsWithMultipleWinners`);
       expect(req.request.method).toBe('GET');
       req.flush(mockResponse);
     });
   });
 
   describe('getStudiosWithWinCount', () => {
-    it('deve chamar a URL com a projection studios-with-win-count', () => {
+    it('deve chamar a URL /studiosWithWinCount', () => {
       const mockResponse = {
         studios: [
           { name: 'Columbia Pictures', winCount: 7 },
@@ -89,14 +89,14 @@ describe('MovieHttpRepository', () => {
         expect(data).toEqual(mockResponse);
       });
 
-      const req = httpTesting.expectOne(`${apiUrl}?projection=studios-with-win-count`);
+      const req = httpTesting.expectOne(`${apiUrl}/studiosWithWinCount`);
       expect(req.request.method).toBe('GET');
       req.flush(mockResponse);
     });
   });
 
   describe('getMaxMinWinIntervalForProducers', () => {
-    it('deve chamar a URL com a projection max-min-win-interval-for-producers', () => {
+    it('deve chamar a URL /maxMinWinIntervalForProducers', () => {
       const mockResponse = {
         min: [{ producer: 'Joel Silver', interval: 1, previousWin: 1990, followingWin: 1991 }],
         max: [{ producer: 'Matthew Vaughn', interval: 13, previousWin: 2002, followingWin: 2015 }],
@@ -106,14 +106,14 @@ describe('MovieHttpRepository', () => {
         expect(data).toEqual(mockResponse);
       });
 
-      const req = httpTesting.expectOne(`${apiUrl}?projection=max-min-win-interval-for-producers`);
+      const req = httpTesting.expectOne(`${apiUrl}/maxMinWinIntervalForProducers`);
       expect(req.request.method).toBe('GET');
       req.flush(mockResponse);
     });
   });
 
   describe('getWinnersByYear', () => {
-    it('deve buscar os vencedores filtrando por winner=true e pelo ano informado', () => {
+    it('deve chamar a URL /winnersByYear com o parâmetro de ano informado', () => {
       const mockMovies = [
         {
           id: 1,
@@ -129,7 +129,7 @@ describe('MovieHttpRepository', () => {
         expect(data).toEqual(mockMovies);
       });
 
-      const req = httpTesting.expectOne(`${apiUrl}?winner=true&year=1986`);
+      const req = httpTesting.expectOne(`${apiUrl}/winnersByYear?year=1986`);
       expect(req.request.method).toBe('GET');
       req.flush(mockMovies);
     });

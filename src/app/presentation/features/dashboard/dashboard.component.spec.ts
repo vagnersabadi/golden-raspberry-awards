@@ -98,4 +98,12 @@ describe('DashboardComponent', () => {
 
     expect(mockGetWinnersByYearUseCase.execute).not.toHaveBeenCalled();
   });
+
+  it('deve buscar vencedores por ano quando searchYear for do tipo number', () => {
+    component.searchYear.set(1986);
+    component.onSearch();
+
+    expect(mockGetWinnersByYearUseCase.execute).toHaveBeenCalledWith(1986);
+    expect(component.yearWinners()).toEqual(mockYearMovies);
+  });
 });

@@ -35,7 +35,7 @@ export class MovieListComponent implements OnInit {
   readonly currentPage = signal<number>(0);
   readonly pageSize = signal<number>(15);
 
-  readonly filterYear = signal<string>('');
+  readonly filterYear = signal<string | number | null>('');
   readonly filterWinner = signal<string>(''); // '': Todos, 'true': Sim, 'false': Não
 
   readonly displayedColumns: string[] = ['id', 'year', 'title', 'winner'];
@@ -76,14 +76,16 @@ export class MovieListComponent implements OnInit {
   }
 
   private fetchMovies() {
-    const yearVal = this.filterYear().trim();
+    const rawYear = this.filterYear();
+    const yearStr = rawYear != null ? String(rawYear).trim() : '';
+    const parsedYear = yearStr ? parseInt(yearStr, 10) : undefined;
     const winnerVal = this.filterWinner();
 
     return this.getMoviesUseCase
       .execute({
         page: this.currentPage(),
         size: this.pageSize(),
-        year: yearVal ? parseInt(yearVal, 10) : undefined,
+        year: parsedYear !== undefined && !isNaN(parsedYear) ? parsedYear : undefined,
         winner: winnerVal === '' ? undefined : winnerVal === 'true',
       })
       .pipe(

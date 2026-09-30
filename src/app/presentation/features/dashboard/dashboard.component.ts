@@ -50,7 +50,7 @@ export class DashboardComponent implements OnInit {
       .slice(0, 3)
   );
 
-  readonly searchYear = signal<string>('');
+  readonly searchYear = signal<string | number | null>('');
   readonly yearWinners = signal<Movie[]>([]);
 
   // Colunas para as tabelas do Angular Material
@@ -70,7 +70,8 @@ export class DashboardComponent implements OnInit {
   }
 
   onSearch(): void {
-    const yearNumber = parseInt(this.searchYear().trim(), 10);
+    const raw = this.searchYear();
+    const yearNumber = typeof raw === 'number' ? raw : parseInt(String(raw ?? '').trim(), 10);
     if (isNaN(yearNumber)) return;
 
     this.getWinnersByYearUseCase.execute(yearNumber).subscribe({

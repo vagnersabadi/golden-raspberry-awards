@@ -40,24 +40,19 @@ export class MovieHttpRepository implements MovieRepository {
   }
 
   getYearsWithMultipleWinners(): Observable<MultipleWinnersResponse> {
-    const params = new HttpParams().set('projection', 'years-with-multiple-winners');
-    return this.http.get<MultipleWinnersResponse>(this.baseUrl, { params });
+    return this.http.get<MultipleWinnersResponse>(`${this.baseUrl}/yearsWithMultipleWinners`);
   }
 
   getStudiosWithWinCount(): Observable<StudiosWinCountResponse> {
-    const params = new HttpParams().set('projection', 'studios-with-win-count');
-    return this.http.get<StudiosWinCountResponse>(this.baseUrl, { params });
+    return this.http.get<StudiosWinCountResponse>(`${this.baseUrl}/studiosWithWinCount`);
   }
 
   getMaxMinWinIntervalForProducers(): Observable<ProducersWinIntervalResponse> {
-    const params = new HttpParams().set('projection', 'max-min-win-interval-for-producers');
-    return this.http.get<ProducersWinIntervalResponse>(this.baseUrl, { params });
+    return this.http.get<ProducersWinIntervalResponse>(`${this.baseUrl}/maxMinWinIntervalForProducers`);
   }
 
   getWinnersByYear(year: number): Observable<Movie[]> {
-    const params = new HttpParams()
-      .set('winner', 'true')
-      .set('year', year.toString());
-    return this.http.get<Movie[]>(this.baseUrl, { params });
+    const params = new HttpParams().set('year', year.toString());
+    return this.http.get<Movie[]>(`${this.baseUrl}/winnersByYear`, { params });
   }
 }
