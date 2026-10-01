@@ -41,9 +41,9 @@ export class MovieListComponent implements OnInit {
   readonly displayedColumns: string[] = ['id', 'year', 'title', 'winner'];
 
   readonly winnerOptions = [
-    { label: 'Yes/No', value: '' },
-    { label: 'Yes', value: 'true' },
-    { label: 'No', value: 'false' },
+    { label: 'Sim/Não', value: '' },
+    { label: 'Sim', value: 'true' },
+    { label: 'Não', value: 'false' },
   ];
 
   private readonly searchSubject$ = new Subject<void>();

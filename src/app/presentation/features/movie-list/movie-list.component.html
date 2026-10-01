@@ -1,13 +1,13 @@
 <mat-card class="movie-list-card" appearance="outlined">
   <mat-card-header>
-    <mat-card-title>List movies</mat-card-title>
+    <mat-card-title>Lista de filmes</mat-card-title>
   </mat-card-header>
 
   <mat-card-content class="table-container">
     <table mat-table [dataSource]="movies()" class="mat-elevation-z0">
       <!-- ID Column -->
       <ng-container matColumnDef="id">
-        <th mat-header-cell *matHeaderCellDef style="width: 10%;">ID</th>
+        <th mat-header-cell *matHeaderCellDef style="width: 10%;">Id</th>
         <td mat-cell *matCellDef="let movie">{{ movie.id }}</td>
       </ng-container>
 
@@ -15,12 +15,12 @@
       <ng-container matColumnDef="year">
         <th mat-header-cell *matHeaderCellDef style="width: 25%;">
           <div class="header-filter-cell">
-            <span class="column-title">Year</span>
+            <span class="column-title">Ano</span>
             <mat-form-field appearance="outline" density="compact" subscriptSizing="dynamic">
               <input
                 matInput
                 type="number"
-                placeholder="Filter by year"
+                placeholder="Filtrar por ano"
                 [ngModel]="filterYear()"
                 (ngModelChange)="filterYear.set($event); onFilterChange()"
               />
@@ -32,7 +32,7 @@
 
       <!-- Title Column -->
       <ng-container matColumnDef="title">
-        <th mat-header-cell *matHeaderCellDef style="width: 45%;">Title</th>
+        <th mat-header-cell *matHeaderCellDef style="width: 45%;">Título</th>
         <td mat-cell *matCellDef="let movie">{{ movie.title }}</td>
       </ng-container>
 
@@ -40,7 +40,7 @@
       <ng-container matColumnDef="winner">
         <th mat-header-cell *matHeaderCellDef style="width: 20%;">
           <div class="header-filter-cell">
-            <span class="column-title">Winner?</span>
+            <span class="column-title">Vencedor?</span>
             <mat-form-field appearance="outline" density="compact" subscriptSizing="dynamic">
               <mat-select
                 [ngModel]="filterWinner()"
@@ -53,14 +53,14 @@
             </mat-form-field>
           </div>
         </th>
-        <td mat-cell *matCellDef="let movie">{{ movie.winner ? 'Yes' : 'No' }}</td>
+        <td mat-cell *matCellDef="let movie">{{ movie.winner ? 'Sim' : 'Não' }}</td>
       </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
 
       <tr class="mat-row" *matNoDataRow>
-        <td class="mat-cell empty-state" colspan="4">No movies found matching filters.</td>
+        <td class="mat-cell empty-state" colspan="4">Nenhum filme encontrado com os filtros aplicados.</td>
       </tr>
     </table>
 
@@ -72,7 +72,7 @@
       [pageSizeOptions]="[10, 15, 25, 50]"
       (page)="onPageChange($event)"
       showFirstLastButtons
-      aria-label="Select page of movies"
+      aria-label="Selecionar página de filmes"
     ></mat-paginator>
   </mat-card-content>
 </mat-card>
